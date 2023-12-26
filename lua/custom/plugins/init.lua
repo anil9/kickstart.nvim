@@ -3,8 +3,6 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  -- Conjure!
-  'Olical/conjure',
 
   -- Structural editing, optional
   'guns/vim-sexp',
@@ -18,6 +16,9 @@ return {
   'clojure-vim/vim-jack-in',
 
   -- coc
-  import = "coc"
+  coc = "coc",
+
+  -- Conjure!
+  conjure = "conjure",
 
 }

@@ -42,8 +42,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
+vim.g.maplocalleader = ','
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -233,15 +232,8 @@ require('lazy').setup({
       -- Fuzzy Finder Algorithm which requires local dependencies to be built.
       -- Only load if `make` is available. Make sure you have the system
       -- requirements installed.
-      {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
+     {'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+      ,
     },
   },
 
@@ -257,7 +249,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
+  'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -266,7 +258,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -278,6 +270,9 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+
+-- Relative line numbers
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -325,6 +320,9 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous dia
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- JK switch to normal mode
+vim.keymap.set('i', 'jk', '<ESC>', { noremap = true })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -423,7 +421,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash', 'markdown', 'fennel', 'clojure' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,

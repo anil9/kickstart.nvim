@@ -15,10 +15,4 @@ return {
   'radenling/vim-dispatch-neovim',
   'clojure-vim/vim-jack-in',
 
-  -- coc
-  coc = "coc",
-
-  -- Conjure!
-  conjure = "conjure",
-
 }

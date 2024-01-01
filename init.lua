@@ -187,14 +187,14 @@ require('lazy').setup({
       end,
     },
   },
-
+  
+    'folke/tokyonight.nvim',
   {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
+    "rose-pine/neovim",
+    name = 'rose-pine',
     config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
+      vim.cmd("colorscheme rose-pine")
+    end
   },
 
   {
@@ -204,7 +204,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'rose-pine',
         component_separators = '|',
         section_separators = '',
       },
@@ -267,6 +267,8 @@ require('lazy').setup({
 
 -- Set highlight on search
 vim.o.hlsearch = false
+
+vim.o.cursorline = true
 
 -- Make line numbers default
 vim.wo.number = true
